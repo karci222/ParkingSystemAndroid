@@ -13,7 +13,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -165,7 +167,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         for(Locations locations: locationses){
-            googleMap.addMarker(new MarkerOptions().position(new LatLng(locations.xLoc, locations.yLoc)).title("Region: " + locations.Region_num + " Free: " + findFreeSpaces(locations.Region_num)));
+            if(findFreeSpaces(locations.Region_num) > 0){
+                Marker mLoc = googleMap.addMarker(new MarkerOptions().position(new LatLng(locations.xLoc, locations.yLoc)).
+                        title("Region: " + locations.Region_num + " Free: " + findFreeSpaces(locations.Region_num))
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+            }else{
+                Marker mLoc = googleMap.addMarker(new MarkerOptions().position(new LatLng(locations.xLoc, locations.yLoc)).
+                        title("Region: " + locations.Region_num + " Free: " + findFreeSpaces(locations.Region_num))
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+            }
         }
     }
     public int findFreeSpaces(int Region_num){
