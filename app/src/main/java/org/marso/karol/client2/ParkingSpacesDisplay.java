@@ -41,7 +41,7 @@ public class ParkingSpacesDisplay extends AppCompatActivity {
         Log.d("Data","" + listData.space_records.size());
 
         for (SPACE_RECORD space_record : listData.space_records){
-            if(space_record.Free == 1){
+            if(space_record.Free == 0){
                 buttons[space_record.Space_num].setBackgroundColor(getResources().getColor(R.color.colorGreen));
             }else{
                 buttons[space_record.Space_num].setBackgroundColor(getResources().getColor(R.color.colorRed));

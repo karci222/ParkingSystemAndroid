@@ -129,7 +129,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         for (ListData listData: list
                 ) {
             if (listData.region == region){
-                if(Free == 1){
+                if(Free == 0){
                     listData.freeSpaces++;
 
                 }
@@ -140,11 +140,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if(!found){
             if(Free == 0){
-                ListData data = new ListData(region, 0);
+                ListData data = new ListData(region, 1);
+                data.freeSpaces = 1;
                 data.addToSpaceRecords(Free, Space_num);
                 list.add(data);
             }else{
-                ListData data = new ListData(region, 1);
+                ListData data = new ListData(region, 0);
                 data.addToSpaceRecords(Free, Space_num);
                 list.add(data);
             }
